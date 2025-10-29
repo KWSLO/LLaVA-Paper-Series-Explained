@@ -1,5 +1,5 @@
 
-![[Pasted image 20251029075623.png]]
+![image](1.png)
 论文链接: <https://arxiv.org/pdf/2304.08485>
 项目链接: <https://llava-vl.github.io/>
 
@@ -16,13 +16,14 @@
 ### A.架构创新
 
 #### 概要
-![[Pasted image 20251029080226.png]]
+![image](2.png)
 
 **Vision Encoder:** pre-trained CLIP visual encoder ViT-L/14
 **Projection:** a simple linear layer
 **Language Model:** Vicuna
 
 输入图像 $X_V$ ，使用视觉编码器提取图像特征，即 $Z_v = g(X_v)$ ，随后将提取到的图像特征 $Z_v$ 送入投影层 $W$ ，经过 **a simple linear layer** 得到 $H_v$ ，即 $$H_V=W*Z_v, Z_v = g(X_v)$$
+
 简单的来说，作者通过一个投影层 $W$ 将图像特征 $Z_v$ 对齐到LLM的embedding空间，得到 $H_V$ ，其具有与LLM词嵌入空间相同的维度。
 
 #### 优劣
@@ -37,7 +38,7 @@
 
 ### B.数据集创新
 
-![[Pasted image 20251029090551.png]]
+![image](5.png)
 
 #### 概要
 作者创新的使用了 **「多模态指令跟随（Instruction-following）」数据集** ，目的是为了让AI能更自然的与人对话，遵循人的要求回答。
@@ -71,9 +72,9 @@
 即上文所说的**多模态指令跟随（Instruction-following）」数据集**  中的
 单轮instruction-following 对话
 
-模型输入是：![[Pasted image 20251029103820.png]]
+模型输入是：![image](6.png)
 目的是预测：
-![[Pasted image 20251029103851.png]]
+![image](7.png)
 
 其中：
 - $θ$：是唯一可训练的参数
@@ -103,7 +104,7 @@
 **参数冻结** 
 - CLIP 被冻结
 - 投影层和LLM训练，前者调整视觉语义映射，后者学习理解视觉内容，理解指令，并控制回答风格，例如长度，形式，详细程度等等。
-![[Pasted image 20251029114452.png]]
+![image](11.png)
                                结果示例
 ### D.评估
 
@@ -145,7 +146,7 @@ $(\text{image}, \text{ground-truth description}, \text{question})$
 作者构建了两种不同的benchmark，分别为受控环境（LLaVA-Bench (COCO)）与野外环境（LLaVA-Bench (In-the-Wild)）
 
 其中，基于COCO数据集子集而生成的benchmark，其核心是：观察不同类型的 instruction-following 数据对模型对齐与指令遵循能力的影响。
-![[Pasted image 20251029111340.png]]
+![image](8.png)
 论文发现，
 - **指令调优本身极其有效**：  
 	加入 instruction-following 数据，模型指令遵从能力飙升 >50 分。
@@ -157,7 +158,7 @@ $(\text{image}, \text{ground-truth description}, \text{question})$
     三种数据并用，表现最强（85.1% of GPT-4 text upper bound）。
 
   在In-the-wild benchmark下，目的是为了评估模型在**真实复杂场景与未知领域**中的泛化与推理能力。
-  ![[Pasted image 20251029111653.png]]
+  ![image](9.png)
   论文发现：
 1. **视觉指令调优是决定性因素**
     - LLaVA 明显优于未进行此调优的模型（BLIP-2 / OpenFlamingo）。
@@ -175,7 +176,7 @@ $(\text{image}, \text{ground-truth description}, \text{question})$
 设计该benchmark目的不在于构建一个benchmark让自己的模型高分，而是在于暴露出模型的缺陷，从而为未来的研究寻找改进点。
 
 例如：
-![[Pasted image 20251029112218.png]]
+![image](10.png)
 在右图的测试中发现，
 当问到冰箱里是否有草莓味酸奶时，模型回答 $yes$ ，  然而实际图像中只有“草莓”和“酸奶”，没有“草莓味酸奶”。
 
