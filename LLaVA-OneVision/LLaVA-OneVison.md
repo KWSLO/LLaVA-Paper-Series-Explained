@@ -1,4 +1,4 @@
-![image](LLaVA-OneVision/image/1.png)
+![image](image/1.png)
 
 论文地址：<https://arxiv.org/pdf/2408.03326>
 
@@ -10,11 +10,11 @@
 	- **最大化复用已有的强大预训练模型能力**（LLM 与视觉模型）
 	- **最小化多模态适配层的复杂度与计算开销**
 	- **确保架构具备良好的扩展性**，能随数据量或模型规模提升而稳步增强性能
-	![image](LLaVA-OneVision/image/19.png)
+	![image](image/19.png)
 
 
 ### A.模型架构
-![image](LLaVA-OneVision/image/2.png)
+![image](image/2.png)
 
 **Vision Encoder:** SigLIP
 **Projection:** 2-Layer MLP
@@ -22,7 +22,7 @@
 
 输入图像 $X_V$ ，使用视觉编码器提取图像特征，即 $Z_v = g(X_v)$ ，随后将提取到的图像特征 $Z_v$ 送入投影层 $W$ ，经过 **2-Layer MLP** 得到 $H_v$ ，即 $$H_V=p(Z_v), Z_v = g(X_v)$$
 对于长度为 $L$ 的序列，通过如下的方式计算目标答案 $X_a$ 的概率 
-![image](LLaVA-OneVision/image/3.png)
+![image](image/3.png)
 可以从该计算方式看出来，LLaVA-OneVision统一了单图、多图与视频帧。 只需把不同的视觉信号当作 **图像序列** 输入 vision encoder 即可，无需额外改动，提高了通用性，具有强大的泛化能力。
 
 同时，实验提及了“The grid features before and after the last Transformer layer are considered in our experiments.”说明论文在有意识的比较最后一层Transformer前后的特征有什么不同。
@@ -70,7 +70,7 @@
 - T = 每个 crop 的 token 数
 
 为了防止总token数过多带来的成本上升，设定token**阈值 τ**，并通过如下公式调整各图token数
-![image](LLaVA-OneVision/image/4.png)
+![image](image/4.png)
 - **如果总 token 数超过阈值 τ** (L > τ)：
     - 将每个 crop 的 token 数**缩减到 $T_{new}$**
     - 保证最终总 token 数 ≈ **τ**
@@ -93,10 +93,10 @@
 - 每个 crop（以及每张图的 base image）在经过视觉编码器后产生 **$T_i$** 个 token。（注意：这里我们把 base image 的 token 数也记为 **$T_i$**，与 crop 相同的表示方式，方便统一计算）
 - 因为保留 base image，所以第 $i$ 张图贡献的 token 数为 **$(c_i+1)×T_i$**
 - 总 token 数：
-![image](LLaVA-OneVision/image/5.png)
+![image](image/5.png)
 - 设定全局阈值为 **τ**。若 **L>τ**，则对每帧 / 每图按比例下采样 token
 ####  **(2)下采样**
-如果 **L>τ**，则应用下采样策略，即![image](LLaVA-OneVision/image/6.png)
+如果 **L>τ**，则应用下采样策略，即![image](image/6.png)
 #### **(3)可控的 performance and cost**
 - 如果想更快推理，那就降低 **τ**；如果想更细节，那就增大 **τ**；如果想快速处理视频，那就每帧减少 token 数。
 
@@ -146,7 +146,8 @@
 
 
 总体如下图：
-![image](LLaVA-OneVision/image/7.png)![image](LLaVA-OneVision/image/8.png)
+![image](image/7.png)
+![image](image/8.png)
 
 ### C.数据
 
@@ -157,8 +158,8 @@
 - **视觉指令微调**
 
 #### (A) 高质量知识学习
-###### **(1) Re-Captioned Detailed Description Data**
-###### **(2) Document / OCR Data
+###### (1) Re-Captioned Detailed Description Data
+###### (2) Document / OCR Data
 ###### (3) Chinese and Language Data
 
 ##### 特点与优势
@@ -176,7 +177,8 @@
 #### （B）Visual Instruction Tuning Data
 
 论文从三个层次来划分Visual Instruction Tuning Data：
-![image](LLaVA-OneVision/image/20.png)
+![image](image/20.png)
+
 ###### i)Vision Input
 1. **Single-image**
 2. **Multi-image**
@@ -206,8 +208,8 @@
 为了避免模型在某类任务或场景过拟合，论文将**平衡了多种单图任务类型的数据量**，同时**增大总数据量来提升基础视觉能力**；对于后者，添加**一定量的高质量单图数据**，**确保基础视觉能力不下降**，同时**混合多图以及视频帧数据**，提高任务迁移能力，总体上**平衡三者的数据分布**，保证平衡训练。
 
 如下图：
-![image](LLaVA-OneVision/image/9.png)
-![image](LLaVA-OneVision/image/10.png)
+![image](image/9.png)
+![image](image/10.png)
 
 ### D.Training Strategies
 
@@ -258,9 +260,9 @@
 
 而对于Stage-2，论文又进一步划分为两个阶段，分别是Single-Image Training，OneVision Training。前者让模型掌握 **单图任务的多样指令跟随能力**，为后续多图和视频任务迁移奠定基础。后者让模型学会在不同视觉场景下跟随指令完成任务，实现**跨场景迁移学习**
 
-![image](LLaVA-OneVision/image/16.png)
-![image](LLaVA-OneVision/image/17.png)
-![image](LLaVA-OneVision/image/18.png)
+![image](image/16.png)
+![image](image/17.png)
+![image](image/18.png)
 ##### 具体策略：
 - **逐步训练**：随着训练阶段推进，最大图像分辨率和视觉 token 数量**逐步增加**，从 Stage-1的 729 tokens 增加到 Stage-2 的 10× Stage-1。并且，Stage-1 **仅使用基础的图像表征**，而1.5和 2 **使用 AnyRes 来提高图像表征能力**。这样循序渐进的训练流程，能让模型逐**步适应长序列输入**，让模型在后期阶段能处理高分辨率图像和更多 token 的多图/视频任务。同时还可以**在固定计算预算下**平衡性能与计算成本，
 
@@ -279,7 +281,7 @@
 
 
 三阶段流程如下图：
-![image](LLaVA-OneVision/image/11.png)
+![image](image/11.png)
 ### E.Results
 ##### 概要
 实验部分采用 **标准化评测框架 LMMs-Eval**，在 **0-shot、greedy decoding** 条件下，系统地测试了模型在多种模态上的表现。结果表明LLaVA-OneVision 在绝大多数基准上优于开源模型，特别是其最大模型（72B）在整体性能上介于 **GPT-4V** 与 **GPT-4o** 之间，而且训练策略证明了高效、可扩展且具通用性的优点，这使得未来改进更加容易，方便未来的研究。
@@ -295,7 +297,7 @@
 
 结果如下图：
 
-![image](LLaVA-OneVision/image/12.png)
+![image](image/12.png)
 
 #### E2.Multi-Image Benchmarks
 ##### 概要
@@ -307,8 +309,8 @@
 经过 OneVision后，模型在若干多图/多视角任务上对 GPT-4V **实现了显著超越**，尤其是在多图推理、找不同与 3D 环境理解等复杂任务上提升明显，且 OneVision 阶段对**多视角/多帧**基准的提升尤为显著（这些基准在单图数据中缺失），说明该阶段对跨场景能力扩展至关重要。
 
 结果如下图：
-![image](LLaVA-OneVision/image/13.png)
-![image](LLaVA-OneVision/image/14.png)
+![image](image/13.png)
+![image](image/14.png)
 #### E3.Video Benchmarks
 ##### 概要
 LLaVA-OneVision 在多个视频基准上表现良好 ，与以往开源模型相比通常更优或相当，且在若些复杂的视频理解基准（如 EgoSchema、VideoMME）上优势更明显。同时在 ActivityNet-QA、MLVU、VideoMME 等基准上，LLaVA-OneVision 能与 GPT-4V 竞争，但在需要大量复杂多轮视觉对话或更深层交互的场景仍有提升空间。
@@ -324,7 +326,7 @@ LLaVA-OneVision 在多个视频基准上表现良好 ，与以往开源模型相
 - 在 ActivityNet-QA，很多问题可单帧回答（例如“球是什么颜色”），因此**仅用单图训练的 SI 模型**已经能**很好处理这类问题**，OneVision 相对提升有限。
 
 结果如下图：
-![image](LLaVA-OneVision/image/15.png)
+![image](image/15.png)
 
 ### F.Emerging Capabilities with Task Transfer（仅做简要阐述，详细请看原文）
 
