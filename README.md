@@ -5,7 +5,8 @@ This repository provides concise, clear explanations of the LLaVA (Large Languag
 本仓库对 LLaVA（Large Language and Vision Assistant）系列研究论文进行简明清晰的解读，涵盖核心创新、模型架构与实验洞察。
 
 ## 📚 Covered Papers / 涵盖论文
-- LLaVA (2023)  https://arxiv.org/pdf/2304.08485 
+- LLaVA (2023)  https://arxiv.org/pdf/2304.08485
+- LLaVA-1.5  https://arxiv.org/pdf/2310.03744
 - *(More to be added)*  
 - （持续更新中）
 
