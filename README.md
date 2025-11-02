@@ -7,6 +7,7 @@ This repository provides concise, clear explanations of the LLaVA (Large Languag
 ## 📚 Covered Papers / 涵盖论文
 - LLaVA (2023)  https://arxiv.org/pdf/2304.08485
 - LLaVA-1.5  https://arxiv.org/pdf/2310.03744
+- LLaVA-OneVision https://arxiv.org/pdf/2408.03326
 - *(More to be added)*  
 - （持续更新中）
 
