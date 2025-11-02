@@ -23,6 +23,7 @@ Visual instruction tuning影响力正逐渐扩大，成为社区的研究重点�
 #### 解决
 显示的指定回答的格式，将所需要的格式加到VQA问题的后面，例如Answer the question using a single word or phrase.如下图
 ![image](image/3.png)
+
 通过这种方法，作者无需对VQA数据集在进行其他处理，将VQA-v2加入训练数据，就能在MME上显著提高(1323.8比809.6)，并比InstructBLIP高出111点。
 
 
