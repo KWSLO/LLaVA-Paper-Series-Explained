@@ -6,7 +6,7 @@
 
 ### 研究动机
 #### 概要
-Visual instruction tuning影响力正逐渐扩大，成为社区的研究重点，有很多benchmark被创建和其他进展，但问题是LLaVA虽然在自然语言对话方面很不错，但在短回答/面向学术任务型数据集上表现不佳，而InstructBLIP虽然采用了Q-former，在数据集引入了面向学术性任务，在此类问题中表现优异，但又在自然语言对话上不如LLavA。基于此，同时也是想研究LLM如何设计，因此本文系统的调查了在controlled setting下LMM的设计选择。
+Visual instruction tuning影响力正逐渐扩大，成为社区的研究重点，有很多benchmark被创建和其他进展，但问题是LLaVA虽然在自然语言对话方面很不错，但在短回答/面向学术任务型数据集上表现不佳，而InstructBLIP虽然采用了Q-former，在数据集引入了面向学术性任务，在此类问题中表现优异，但又在自然语言对话上不如LLaVA。基于此，同时也是想研究LMM如何设计，因此本文系统的调查了在controlled setting下LMM的设计选择。
 
 ### A.Response Format Prompting
 #### 概要
