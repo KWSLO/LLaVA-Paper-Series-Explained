@@ -12,7 +12,7 @@ This repository provides concise, clear explanations of the MLLM series of resea
 - （持续更新中）
 
 ## 🎯 Purpose / 目的
-To help researchers and engineers quickly grasp the evolution and technical details of multimodal LLMs in the LLaVA family—without reading every paper cover-to-cover.  
+To help researchers and engineers quickly grasp the evolution and technical details of multimodal LLMs in the MLLM family—without reading every paper cover-to-cover.  
 帮助研究者与工程师快速掌握 MLLM 系列的技术演进与核心细节，无需逐字通读全文。
 
 ## 📝 Notes  
